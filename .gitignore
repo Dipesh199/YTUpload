@@ -1,0 +1,12 @@
+.env
+.secrets/
+frontend/node_modules/
+frontend/dist/
+__pycache__/
+*.pyc
+input/*
+!input/.gitkeep
+output/*
+!output/.gitkeep
+templates/assets/*
+!templates/assets/.gitkeep

@@ -1,0 +1,74 @@
+{
+  "name": "Long-Form Beat Remix",
+  "schema_version": 3,
+  "output_profile": {
+    "id": "youtube-1080p",
+    "width": 1920,
+    "height": 1080,
+    "aspect_ratio": "16:9",
+    "preserve_source_fps": true
+  },
+  "scale": { "mode": "cover", "zoom": 1 },
+  "crop": { "enabled": true, "focal_x": 0.5, "focal_y": 0.5 },
+  "mirror": { "horizontal": false, "vertical": false },
+  "image_adjustments": { "enabled": true, "contrast": 1.04, "brightness": 0.005, "saturation": 1.06, "gamma": 1, "sharpness": 0.2 },
+  "decorative_frame": { "enabled": true, "style": "double", "color": "#DDE7FF", "thickness": 4, "inset": 18, "opacity": 0.22 },
+  "text": {
+    "enabled": false,
+    "value": "SECTION TITLE",
+    "position": "bottom-center",
+    "font_size": 58,
+    "color": "#FFFFFF",
+    "background": true,
+    "margin": 90,
+    "timing": { "start": 0, "end": null }
+  },
+  "animated_elements": [],
+  "logo_overlay": { "enabled": false, "path": "", "position": "top-right", "width": 180, "opacity": 0.9, "margin": 48, "timing": { "start": 0, "end": null } },
+  "png_overlay": { "enabled": false, "path": "", "position": "center", "width": 1080, "opacity": 1, "margin": 0, "timing": { "start": 0, "end": null } },
+  "watermark": { "enabled": true, "path": "assets/dipesh-sign.png", "position": "bottom-right", "width": 150, "opacity": 0.24, "margin": 42, "timing": { "start": 2, "end": null } },
+  "background_music": { "enabled": true, "path": "assets/cinematic-build.mp3", "volume": 0.07, "fade_in": 2, "fade_out": 4, "timing": { "start": 0, "end": 64 } },
+  "beat_track": {
+    "enabled": true,
+    "asset": "assets/beats/cinematic-drive/cinematic-drive-d3c8e197.wav",
+    "stems": {
+      "kick": "assets/beats/cinematic-drive/cinematic-drive-kick-d3c8e197.wav",
+      "snare": "assets/beats/cinematic-drive/cinematic-drive-snare-d3c8e197.wav",
+      "percussion": "assets/beats/cinematic-drive/cinematic-drive-percussion-d3c8e197.wav",
+      "bass": "assets/beats/cinematic-drive/cinematic-drive-bass-d3c8e197.wav",
+      "atmosphere": "assets/beats/cinematic-drive/cinematic-drive-atmosphere-d3c8e197.wav"
+    },
+    "use_stems": true,
+    "stem_levels": { "kick": 0.9, "snare": 0.76, "percussion": 0.68, "bass": 0.62, "atmosphere": 0.58 },
+    "bpm": 96,
+    "time_signature": "4/4",
+    "offset": 0,
+    "volume": 0.1,
+    "loop": true,
+    "timing": { "start": 0, "end": null },
+    "ducking": { "enabled": true, "speech_volume": 0.04, "attack_ms": 120, "release_ms": 450 }
+  },
+  "beat_effects": [
+    { "id": "downbeat-punch", "type": "punch_zoom", "enabled": true, "trigger": "downbeat", "every_n_beats": 1, "duration_ms": 170, "intensity": 0.035, "start": 0, "end": null, "opacity": 1, "color": "#FFFFFF", "position": "center", "beat_offset": 0, "minimum_interval_ms": 900, "seed": 1001 },
+    { "id": "four-beat-glow", "type": "glow_pulse", "enabled": true, "trigger": "every_n_beats", "every_n_beats": 4, "duration_ms": 240, "intensity": 0.03, "start": 0, "end": null, "opacity": 0.14, "color": "#7C9CFF", "position": "center", "beat_offset": 0, "minimum_interval_ms": 1000, "seed": 1002 },
+    { "id": "twinkling-stars", "type": "twinkling_stars", "enabled": true, "trigger": "every_n_beats", "every_n_beats": 12, "duration_ms": 680, "intensity": 0.1, "start": 4, "end": null, "opacity": 0.22, "color": "#FFF4C7", "position": "center", "beat_offset": 0, "minimum_interval_ms": 2500, "seed": 2401 },
+    { "id": "section-sparkle", "type": "sparkle_burst", "enabled": true, "trigger": "every_n_beats", "every_n_beats": 24, "duration_ms": 520, "intensity": 0.075, "start": 8, "end": null, "opacity": 0.18, "color": "#D9E5FF", "position": "center", "beat_offset": 0.3, "minimum_interval_ms": 5000, "seed": 2402 },
+    { "id": "section-light-lift", "type": "light_leak_sweep", "enabled": true, "trigger": "every_n_beats", "every_n_beats": 16, "duration_ms": 360, "intensity": 0.025, "start": 10, "end": null, "opacity": 0.1, "color": "#FFD6A0", "position": "center", "beat_offset": 0.15, "minimum_interval_ms": 6000, "seed": 2404 },
+    { "id": "subtle-camera-energy", "type": "camera_shake", "enabled": true, "trigger": "every_n_beats", "every_n_beats": 32, "duration_ms": 160, "intensity": 0.012, "start": 12, "end": null, "opacity": 0.1, "color": "#FFFFFF", "position": "center", "beat_offset": 0, "minimum_interval_ms": 9000, "seed": 2405 },
+    { "id": "intro-cinematic-bars", "type": "cinematic_bars", "enabled": true, "trigger": "manual", "every_n_beats": 1, "duration_ms": 600, "intensity": 0.055, "start": 0, "end": 2.6, "opacity": 0.22, "color": "#000000", "position": "center", "beat_offset": 0, "minimum_interval_ms": 1000, "seed": 2403 }
+  ],
+  "audio_tracks": [
+    { "id": "deep-focus-section", "name": "Deep Focus texture", "type": "music", "path": "assets/deep-focus.mp3", "volume": 0.065, "loop": true, "muted": false, "solo": false, "fade_in": 4, "fade_out": 4, "timing": { "start": 60, "end": 124 } },
+    { "id": "bunker-pulse-section", "name": "Bunker Pulse lift", "type": "music", "path": "assets/bunker-pulse.mp3", "volume": 0.06, "loop": true, "muted": false, "solo": false, "fade_in": 4, "fade_out": 5, "timing": { "start": 120, "end": null } },
+    { "id": "transition-whoosh", "name": "Transition whoosh", "type": "sfx", "path": "assets/sfx/transition-whoosh.wav", "volume": 0.22, "loop": false, "muted": false, "solo": false, "fade_in": 0, "fade_out": 0.2, "timing": { "start": 12, "end": 14.4 } },
+    { "id": "cinematic-impact", "name": "Cinematic impact", "type": "sfx", "path": "assets/sfx/cinematic-impact.wav", "volume": 0.3, "loop": false, "muted": false, "solo": false, "fade_in": 0, "fade_out": 0.25, "timing": { "start": 28, "end": 29.4 } },
+    { "id": "soft-riser", "name": "Continuous soft riser", "type": "sfx", "path": "assets/sfx/soft-riser.wav", "volume": 0.055, "loop": true, "muted": false, "solo": false, "fade_in": 2, "fade_out": 2, "timing": { "start": 0, "end": null } }
+  ],
+  "motion_safety": { "reduced_flashing": true },
+  "audio_mixer": { "normalize": true, "peak_limit": 0.95 },
+  "original_audio_volume": 0.94,
+  "master_audio_volume": 0.98,
+  "intro": { "enabled": false, "path": "", "volume": 1 },
+  "outro": { "enabled": false, "path": "", "volume": 1 },
+  "project_defaults": { "preserve_story_order": true, "allow_speed_changes": false, "snap_to_beats": true }
+}

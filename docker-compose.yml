@@ -1,0 +1,74 @@
+services:
+  postgres:
+    image: postgres:18.6-alpine3.24
+    container_name: shorts-studio-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ytupload}
+      POSTGRES_USER: ${POSTGRES_USER:-ytupload}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-ytupload-local-dev}
+    volumes:
+      - postgres-data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ytupload} -d ${POSTGRES_DB:-ytupload}"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: shorts-studio-backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-ytupload}:${POSTGRES_PASSWORD:-ytupload-local-dev}@postgres:5432/${POSTGRES_DB:-ytupload}
+      INPUT_DIR: /app/input
+      OUTPUT_DIR: /app/output
+      TEMPLATE_DIR: /app/templates
+      PREVIEW_DIR: /app/previews
+      FFMPEG_PRESET: ${FFMPEG_PRESET:-medium}
+      FFMPEG_CRF: ${FFMPEG_CRF:-20}
+      FFMPEG_VIDEO_ENCODER: ${FFMPEG_VIDEO_ENCODER:-libx264}
+      FRONTEND_URL: http://localhost:${APP_PORT:-3000}
+      CORS_ORIGINS: http://localhost:${APP_PORT:-3000}
+      GOOGLE_OAUTH_CLIENT_SECRETS_FILE: /run/secrets/google-oauth-client.json
+      GOOGLE_OAUTH_CLIENT_ID: ${GOOGLE_OAUTH_CLIENT_ID:-}
+      GOOGLE_OAUTH_CLIENT_SECRET: ${GOOGLE_OAUTH_CLIENT_SECRET:-}
+      GOOGLE_OAUTH_REDIRECT_URI: ${GOOGLE_OAUTH_REDIRECT_URI:-http://localhost:8000/api/automation/oauth/google/callback}
+      OAUTH_TOKEN_ENCRYPTION_KEY_FILE: /run/secrets/oauth-token.key
+      OAUTH_TOKEN_ENCRYPTION_SECRET: ${OAUTH_TOKEN_ENCRYPTION_SECRET:-}
+      YOUTUBE_PUBLISHING_ENABLED: ${YOUTUBE_PUBLISHING_ENABLED:-true}
+    volumes:
+      - ./input:/app/input
+      - ./output:/app/output
+      - ./templates:/app/templates
+      - ./.secrets/google-oauth-client.json:/run/secrets/google-oauth-client.json:ro
+      - ./.secrets/oauth-token.key:/run/secrets/oauth-token.key:ro
+      - preview-cache:/app/previews
+    ports:
+      - "${API_PORT:-8000}:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: shorts-studio-frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "${APP_PORT:-3000}:80"
+    restart: unless-stopped
+
+volumes:
+  preview-cache:
+  postgres-data:
